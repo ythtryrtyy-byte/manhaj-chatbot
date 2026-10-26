@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مساعد «المناهج وتنظيماتها»</title>
+<style>
+:root{--bg:#f2f6f5;--card:#fff;--tx:#18242b;--mut:#66757f;--pri:#157a64;--pri2:#2aa58a;--bd:#dde5e3;--me:#e1f3ee;--ok:#1e8e5a;--no:#c0392b;--sh:0 2px 10px rgba(20,60,50,.08)}
+:root[data-theme=dark]{--bg:#12171b;--card:#1c242b;--tx:#e8edf2;--mut:#93a0ad;--pri:#3fb59a;--pri2:#1f8c76;--bd:#2c3741;--me:#1a3a33;--ok:#3fb59a;--no:#e0685a;--sh:0 2px 10px rgba(0,0,0,.3)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12171b;--card:#1c242b;--tx:#e8edf2;--mut:#93a0ad;--pri:#3fb59a;--pri2:#1f8c76;--bd:#2c3741;--me:#1a3a33;--ok:#3fb59a;--no:#e0685a;--sh:0 2px 10px rgba(0,0,0,.3)}}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--tx)}
+#app{display:flex;height:100vh;height:100dvh;padding-top:env(safe-area-inset-top,0px)}
+aside{width:290px;flex-shrink:0;background:var(--card);border-inline-end:1px solid var(--bd);overflow-y:auto;padding:12px}
+main{flex:1;display:flex;flex-direction:column;min-width:0}
+header{display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff}
+.ht{flex:1;min-width:0}h1{font-size:18px;margin:0}.sub{font-size:12px;opacity:.85;margin-top:2px}
+button{font:inherit;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:8px 12px;cursor:pointer;transition:.15s}
+button:hover:not(:disabled){border-color:var(--pri);transform:translateY(-1px)}button:disabled{cursor:default}
+button.p{background:var(--pri);color:#fff;border-color:var(--pri)}
+.ic{background:rgba(255,255,255,.18);border-color:transparent;color:#fff;padding:6px 10px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;padding:10px 14px;background:var(--card);border-bottom:1px solid var(--bd)}
+#chat{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.m{max-width:min(820px,94%);padding:11px 15px;border-radius:16px;border:1px solid var(--bd);background:var(--card);line-height:1.85;overflow-wrap:anywhere;box-shadow:var(--sh);animation:in .25s}
+.m.u{align-self:flex-start;background:var(--me);border-radius:16px 16px 16px 4px}.m.a{align-self:flex-end;border-inline-start:4px solid var(--pri2)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.m p{margin:.4em 0}.m h4{margin:.9em 0 .3em;color:var(--pri)}.m ul,.m ol{margin:.3em 0;padding-inline-start:1.4em}
+.src{font-size:13px;color:var(--pri);font-weight:600;margin-bottom:4px}.note{font-size:12px;color:var(--mut)}
+.tw{overflow-x:auto}table{border-collapse:collapse}th,td{border:1px solid var(--bd);padding:6px 10px;text-align:right}th{background:var(--me)}
+.cp{font-size:12px;margin:6px 6px 0 0;padding:3px 9px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-self:flex-end;max-width:min(820px,94%)}
+.chips button{border-radius:999px;font-size:14px;padding:6px 13px;background:var(--me)}
+.opts{display:flex;flex-direction:column;gap:6px;margin:6px 0}.opt{text-align:right}
+.opt.good{background:var(--ok);color:#fff;border-color:var(--ok)}.opt.bad{background:var(--no);color:#fff;border-color:var(--no)}
+.dots i{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--pri);animation:bl 1s infinite}.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
+@keyframes bl{50%{opacity:.2}}
+.hero{background:linear-gradient(135deg,var(--me),var(--card));border-color:var(--pri2);width:min(820px,94%)}
+.hg{font-size:20px;font-weight:700;color:var(--pri)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.stats div{background:var(--card);border:1px solid var(--bd);border-radius:12px;text-align:center;padding:8px 2px;font-size:12px;color:var(--mut)}.stats b{display:block;font-size:20px;color:var(--pri)}
+.daily{background:var(--card);border:1px dashed var(--pri2);border-radius:12px;padding:10px;margin-top:8px}.daily span{font-weight:600;color:var(--pri)}
+.nm{display:flex;gap:6px;margin-top:10px}
+#sg{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 6px}#sg:empty{display:none}#sg button{font-size:13px;border-radius:999px;background:var(--me);padding:4px 11px}
+form{display:flex;gap:8px;padding:10px 14px;background:var(--card);border-top:1px solid var(--bd);padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+input{flex:1;font:inherit;border:1px solid var(--bd);border-radius:12px;padding:10px 14px;background:var(--bg);color:var(--tx);min-width:0}
+details{margin-bottom:6px}summary{cursor:pointer;font-weight:700;padding:7px 2px;color:var(--pri)}summary small{color:var(--mut);font-weight:400}
+.sb button{display:block;width:100%;text-align:right;border:0;background:none;padding:6px 8px;border-radius:8px;font-size:14px}.sb button:hover{background:var(--me);transform:none}
+.sb .gl button{display:inline-block;width:auto;border:1px solid var(--bd);margin:2px;font-size:13px}
+#ov{display:none}#mn{display:none}
+@media(max-width:800px){#mn{display:inline-block}aside{position:fixed;top:0;bottom:0;right:0;width:84%;max-width:330px;transform:translateX(100%);transition:.25s;z-index:20}aside.open{transform:none;box-shadow:0 0 30px rgba(0,0,0,.4)}#ov.on{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:15}.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="app">
+<aside id="side">
+<details open class="sb"><summary>📚 الفهرس</summary><div id="toc"></div></details>
+<details class="sb"><summary>⭐ المفضلة <small id="fc"></small></summary><div id="fav"></div></details>
+<details class="sb"><summary>🔤 المصطلحات <small id="gc"></small></summary><div id="gl" class="gl"></div></details>
+</aside>
+<div id="ov"></div>
+<main>
+<header><button id="mn" class="ic">☰</button><div class="ht"><h1 id="h1">📘</h1><div class="sub" id="srcl"></div></div><button id="sv" class="ic" title="حفظ المحادثة">💾</button><button id="th" class="ic" title="الوضع الليلي">🌓</button></header>
+<div class="bar">
+<button data-a="ask">💬 اسأل سؤالًا</button><button data-a="sum">📝 لخّص فصلًا</button>
+<button data-a="quiz">🎯 اختبرني</button><button data-a="cmp">⚖️ قارن بين مفهومين</button>
+<button id="ld">📂 تحميل ملف .md</button><button id="rs">↩ الافتراضي</button><input type="file" id="fi" accept=".md,.txt,text/markdown,text/plain" hidden>
+</div>
+<div id="chat"></div>
+<div id="sg"></div>
+<form id="f"><input id="q" placeholder="اكتب سؤالك أو كلمة مفتاحية…" autocomplete="off"><button class="p">إرسال</button></form>
+</main>
+</div>
+<script>
+const DEFAULT_KB="## المقدمة\n\nتُعد المناهج الدراسية حجر الزاوية في المنظومة التعليمية والتربوية؛ فهي ليست مجرد كتب دراسية يُطلب من المتعلمين حفظها، بل مخطط تربوي يترجم فلسفة المجتمع وأهدافه ورؤيته إلى خبرات تعليمية داخل المؤسسات التعليمية وخارجها.\n\nومع اتساع المعرفة وتطور نظريات التعلم والتحولات التكنولوجية والاجتماعية والعلمية، أصبح المنهج منظومة متكاملة من الخبرات المخططة التي تهدف إلى بناء شخصية المتعلم وتحقيق نموه العقلي والوجداني والمهاري والاجتماعي.\n\n---\n\n## الفصل الأول: مفهوم المناهج الدراسية وتطورها التاريخي\n\n### 1. المعنى اللغوي والاصطلاحي للمنهج\n\n**المعنى اللغوي:** ترجع كلمة «منهج» إلى المادة اللغوية (ن هـ ج)، ويقال «نهج الطريق» أي سلكه واتضح، والمنهج هو الطريق الواضح.\n\n**المعنى الاصطلاحي:** تطورت تعريفات المنهج وفقًا للفلسفات التربوية والرؤى العلمية، ويمكن التمييز بين اتجاهين رئيسيين:\n\n1. الاتجاه التقليدي: المنهج القائم على المادة الدراسية.\n2. الاتجاه الحديث: المنهج القائم على الخبرة الشاملة والمتكاملة.\n\n### 2. مفهوم المنهج التقليدي\n\nالمنهج التقليدي هو مجموع المعارف والمواد الدراسية التي يتولى المعلم تلقينها للطالب، مع التركيز على التحصيل العقلي والحفظ، وإهمال بعض الأنشطة والمهارات.\n\n### 3. مفهوم المنهج الحديث\n\nالمنهج الحديث هو جميع الخبرات المرئية والضمنية، الصفية واللاصفية، التي توفرها المؤسسة التعليمية للمتعلمين تحت إشرافها، بهدف تعديل سلوكهم وتحقيق نموهم الشامل.\n\nويؤكد المفهوم الحديث أهمية:\n\n- توجيه الخبرات المنتقاة التي تقدم للطلاب.\n- التخطيط لتعلم الطلاب.\n- الاهتمام بنواتج التعلم.\n- اختيار الأساليب المناسبة لتحقيق الأهداف التربوية والسلوكية.\n\n### 4. أهمية دراسة المناهج بالنسبة للمعلم\n\n1. فهم أن المنهج أوسع من الكتاب المدرسي، ويشمل الخبرات التي يشرف عليها المعلم.\n2. تنمية التفكير والبحث الاستكشافي بدلًا من الاقتصار على الحفظ والتكرار.\n3. صياغة الأهداف السلوكية في المجالات المعرفية والوجدانية والمهارية.\n4. اختيار طرق التدريس الملائمة للمحتوى ومستويات الطلاب.\n5. استخدام التقويم البنائي والختامي للتحقق من تحقيق الأهداف.\n6. تشخيص احتياجات الطلاب وتقديم التغذية الراجعة وتعديل المسار التعليمي.\n\n### 5. أهمية المناهج بالنسبة للمتعلم\n\n1. تنمية المعارف والقيم والأخلاق والمهارات العملية والجسدية.\n2. توفير أنشطة متنوعة تناسب قدرات الطلاب واحتياجاتهم.\n3. تنمية التفكير النقدي وحل المشكلات والتواصل والتعامل مع التكنولوجيا والعمل الجماعي.\n4. ربط المعرفة بالحياة اليومية والمهن المستقبلية.\n\n### 6. أهمية المناهج بالنسبة للمجتمع\n\n1. ترسيخ الهوية ونقل الثقافة والقيم بين الأجيال.\n2. دعم التنمية المستدامة ومواكبة احتياجات سوق العمل.\n3. توجيه المحتوى لمعالجة قضايا المجتمع مثل الصحة والبيئة والمواطنة وحقوق الإنسان.\n\n### 7. التنظيم الهيكلي للمنهج التقليدي\n\n- **المادة الدراسية:** محور العملية التعليمية.\n- **المعلم:** المصدر الرئيسي للمعرفة، ويركز دوره على الشرح والتلقين والتسميع.\n- **الطالب:** متلقٍ للمعلومات، وينحصر دوره غالبًا في الحفظ والاستظهار.\n- **التقويم:** يعتمد على الاختبارات التحريرية أو الشفهية لقياس قدرة الطالب على استرجاع المعلومات.\n\n### 8. نقد المنهج التقليدي\n\n1. إهمال جوانب النمو الوجداني والنفسي والمهاري والاجتماعي والجسمي.\n2. عزل المدرسة عن المجتمع ومشكلاته الواقعية.\n3. عدم مراعاة الفروق الفردية في الاستعدادات والميول والقدرات.\n4. تقليل دور الطالب في الاستكشاف والنقد وحل المشكلات.\n5. تفكيك المعرفة بسبب الفصل التام بين المواد الدراسية.\n\n### 9. العوامل التي أدت إلى تطور مفهوم المنهج\n\n1. **علم النفس التربوي وعلم نفس النمو:** أكدت الدراسات أن المتعلم نشط، وأن نموه متكامل.\n2. **التطور التكنولوجي والانفجار المعرفي:** عززا الانتقال من تلقين المعلومات إلى تعليم مهارات الوصول إلى المعرفة والتعلم الذاتي.\n3. **الفلسفة التقدمية:** ارتبطت بجون ديوي وركزت على الخبرة العملية والتعلم بالممارسة والربط بين المدرسة والمجتمع.\n4. **تغير احتياجات سوق العمل:** أدى إلى زيادة الاهتمام بالتفكير النقدي وحل المشكلات والتواصل والتكنولوجيا.\n\n### 10. مبادئ المنهج الحديث\n\n- المنهج ليس مجرد مجموعة من المواد الدراسية.\n- المنهج ديناميكي ومرن وقابل للتطوير.\n- ينبغي مراجعة المناهج وفقًا لاحتياجات المجتمع والتغيرات.\n- يشمل المنهج الخبرات التي تهيئها المدرسة ويشارك فيها المتعلم تحت إشرافها.\n- يهدف إلى تحقيق النمو الشامل وتعديل السلوك.\n- يجب أن ترتبط الأهداف بالمحتوى والتدريس والأنشطة والتقويم.\n\n### 11. خصائص المنهج الحديث\n\n- التركيز على المتعلم.\n- مراعاة الفروق الفردية.\n- ربط التعلم بالحياة والمجتمع.\n- تنمية مهارات التفكير والاستقصاء وحل المشكلات.\n- تنويع طرق التدريس والأنشطة والوسائل.\n- استخدام التقويم المستمر والتغذية الراجعة.\n- قابلية التطوير والتحديث.\n\n### 12. مقارنة بين المنهج التقليدي والحديث\n\n| وجه المقارنة | المنهج التقليدي | المنهج الحديث |\n|---|---|---|\n| محور الاهتمام | المادة الدراسية | المتعلم والخبرات |\n| دور المعلم | ناقل للمعلومات | ميسر وموجه |\n| دور المتعلم | متلقٍ وحافظ | مشارك وباحث |\n| التدريس | التلقين والاستظهار | النشاط والفهم والتطبيق |\n| المحتوى | مواد منفصلة غالبًا | خبرات أكثر ترابطًا |\n| التقويم | اختبارات تقيس التذكر غالبًا | تقويم متنوع ومستمر |\n| العلاقة بالمجتمع | محدودة | ربط بالواقع والمشكلات |\n\n### 13. أنواع المنهج من حيث ظهوره\n\n**المنهج الرسمي أو الصريح:** المعارف والمهارات والقيم المخطط لها والمعلنة في الوثائق والمواد والأنشطة.\n\n**المنهج الخفي أو الضمني:** القيم والاتجاهات التي يكتسبها الطالب من ثقافة المدرسة وسلوك المعلمين والعلاقات والقواعد، حتى إن لم تُذكر رسميًا.\n\n**المنهج الصفري:** المعارف أو الخبرات التي لا يتضمنها المنهج أو يتم استبعادها.\n\n### 14. الاتجاهات المعاصرة\n\nتشمل الاتجاهات المعاصرة توظيف التعلم الرقمي والتفاعلي، وتوفير مصادر متعددة للمعرفة، وتكييف الخبرات وفق احتياجات المتعلم، مع استمرار دور المعلم في التوجيه والمتابعة.\n\n---\n\n## الفصل الثاني: عناصر المنهج الدراسي\n\n### 1. الأهداف التعليمية\n\nالأهداف التعليمية هي النتائج التي يُتوقع أن يحققها المتعلم نتيجة مروره بالخبرات التعليمية. وهي توجه اختيار المحتوى وطرق التدريس والأنشطة وأساليب التقويم.\n\n#### أهمية الأهداف\n\n- تحديد النتائج التعليمية المرغوبة.\n- توجيه اختيار المحتوى والخبرات.\n- مساعدة المعلم على اختيار الاستراتيجيات المناسبة.\n- تحديد أساس للحكم على نجاح التعلم.\n- توضيح ما هو متوقع من المتعلم.\n\n#### مصادر الأهداف\n\nتستمد الأهداف من:\n\n- فلسفة المجتمع وقيمه.\n- احتياجات المتعلمين وخصائص نموهم.\n- طبيعة المعرفة والمواد الدراسية.\n- احتياجات المجتمع وسوق العمل.\n- التطورات العلمية والتكنولوجية.\n\n#### مستويات الأهداف\n\n1. **الأهداف العامة:** أهداف واسعة وطويلة المدى تعبّر عن الغايات الكبرى للتعليم.\n2. **الأهداف الخاصة:** ترتبط بمادة أو مرحلة أو وحدة تعليمية.\n3. **الأهداف السلوكية أو الإجرائية:** تصف أداءً متوقعًا يمكن ملاحظته وقياسه.\n\n#### مجالات الأهداف\n\n1. **المجال المعرفي:** يتعلق بالمعرفة والفهم والتطبيق والتحليل والتقويم والإبداع.\n2. **المجال الوجداني:** يتعلق بالقيم والاتجاهات والميول والتقدير.\n3. **المجال المهاري أو النفس حركي:** يتعلق بأداء المهارات العملية والحركية.\n\n#### شروط صياغة الهدف السلوكي\n\n- أن يكون واضحًا ومحددًا.\n- أن يركز على أداء المتعلم.\n- أن يكون قابلًا للملاحظة أو القياس.\n- أن يناسب مستوى المتعلم.\n- أن يوضح مستوى الأداء المطلوب عند الحاجة.\n\nمثال توضيحي: «أن يفسر المتعلم مفهومًا محددًا باستخدام مثال صحيح».\n\n### 2. المحتوى التعليمي\n\nالمحتوى هو المعارف والمفاهيم والمبادئ والمهارات والقيم التي يتم اختيارها لتحقيق الأهداف التعليمية.\n\n#### أشكال المحتوى\n\n- **الحقائق:** معلومات محددة يمكن التحقق منها.\n- **المفاهيم:** أفكار عامة تجمع أمثلة ووقائع متشابهة.\n- **المبادئ والتعميمات:** علاقات أو قواعد تربط مفاهيم متعددة.\n- **النظريات والقوانين:** أطر تفسيرية أو علاقات منظمة للظواهر.\n- **المهارات:** أداءات معرفية أو عملية يمكن تعلمها وتطويرها.\n- **القيم والاتجاهات:** معايير ومواقف تساعد في توجيه السلوك.\n\n#### معايير اختيار المحتوى\n\n1. الارتباط بالأهداف.\n2. الدقة والصدق العلمي.\n3. الملاءمة لمستوى المتعلم.\n4. الأهمية والفائدة.\n5. مراعاة ثقافة المجتمع واحتياجاته.\n6. التوازن بين العمق والاتساع.\n7. إمكانية التعلم والتطبيق.\n8. قابلية التحديث عند تغير المعرفة.\n\n#### تنظيم المحتوى\n\nيمكن تنظيم المحتوى:\n\n- من البسيط إلى المركب.\n- من المعلوم إلى المجهول.\n- من المحسوس إلى المجرد.\n- من القريب إلى البعيد.\n- وفق التسلسل والتكامل والترابط.\n- بطريقة حلزونية تعيد المفاهيم تدريجيًا بعمق أكبر.\n\n### 3. طرق التدريس واستراتيجيات التعلم\n\nتحدد طرق التدريس كيفية تقديم المحتوى ومشاركة المتعلم في تحقيق الأهداف. ويعتمد اختيار الطريقة على الأهداف وطبيعة المحتوى وخصائص الطلاب والإمكانات المتاحة.\n\nمن الاستراتيجيات المستخدمة:\n\n- الشرح والحوار والمناقشة.\n- التعلم التعاوني.\n- حل المشكلات.\n- التعلم القائم على المشروعات.\n- الاستقصاء والاكتشاف.\n- التعلم العملي والتجريبي.\n- التعلم المدمج والرقمي.\n\nلا توجد طريقة واحدة مناسبة لكل المواقف التعليمية، لذلك يُفضل تنويع الطرق وفقًا للهدف والمحتوى واحتياجات المتعلمين.\n\n### 4. الأنشطة التعليمية\n\nالأنشطة خبرات يشارك فيها المتعلم لتطبيق المعرفة وتنمية المهارات والاتجاهات. وقد تكون:\n\n- صفية أو لا صفية.\n- فردية أو جماعية.\n- نظرية أو عملية.\n\nينبغي أن ترتبط الأنشطة بالأهداف، وتناسب قدرات الطلاب، وتتيح المشاركة والتعاون والتفكير والتطبيق.\n\n### 5. الوسائل والمصادر التعليمية\n\nتشمل الكتب والرسوم والنماذج والأدوات والتجارب والعروض والموارد الرقمية والمنصات التعليمية.\n\nيُختار المورد التعليمي وفقًا للهدف، وخصائص المتعلمين، ودقته، وسهولة استخدامه، ومدى إتاحته.\n\n### 6. التقويم\n\nالتقويم عملية منظمة لجمع الأدلة وتحليلها والحكم على تقدم المتعلم وفاعلية المنهج، ثم استخدام النتائج في تحسين التعليم.\n\n#### أنواع التقويم\n\n**التقويم القبلي أو التشخيصي:** يُستخدم قبل التعلم لتحديد المعارف السابقة والاستعدادات والصعوبات.\n\n**التقويم البنائي أو التكويني:** يُستخدم أثناء التعلم لتقديم تغذية راجعة وتعديل التدريس أولًا بأول.\n\n**التقويم الختامي أو التجميعي:** يُستخدم في نهاية وحدة أو فصل أو برنامج للحكم على مدى تحقق الأهداف.\n\n**التقويم التتبعي:** يتابع أثر التعلم بعد فترة، ومدى قدرة المتعلم على تطبيق ما تعلمه في الحياة العملية.\n\n#### أدوات التقويم\n\n- الاختبارات التحريرية والشفهية.\n- المناقشات الصفية.\n- الواجبات القصيرة.\n- بطاقات الملاحظة.\n- المشروعات والمهام الأدائية.\n- ملفات الإنجاز.\n- المقابلات والاستبانات ودراسات المتابعة.\n\n#### التقويم البديل والواقعي\n\nيهدف إلى قياس قدرة المتعلم على تطبيق المعارف والمهارات في مواقف حقيقية أو قريبة من الحياة الواقعية.\n\nمن أدواته:\n\n1. **ملفات الإنجاز:** تجمع أعمال الطالب وتوضح نموه وتطوره عبر الزمن.\n2. **قواعد التقدير:** توضح معايير الأداء ومستوياته.\n3. **سجلات الملاحظة:** تسجل أداء المتعلم في المواقف التعليمية.\n4. **التقويم الذاتي وتقويم الأقران:** يشرك المتعلم في تقييم أدائه وأداء زملائه.\n\n### 7. العلاقة بين عناصر المنهج والتغذية الراجعة\n\nتعمل عناصر المنهج في منظومة مترابطة:\n\n- تحدد الأهداف طبيعة المحتوى.\n- توجه الأهداف والمحتوى اختيار الاستراتيجيات والأنشطة.\n- يكشف التقويم مدى تحقق الأهداف وفاعلية التدريس.\n- تُستخدم التغذية الراجعة لتعديل الأهداف أو المحتوى أو الاستراتيجيات عند الحاجة.\n\n---\n\n## الفصل الثالث: أسس بناء المناهج الدراسية\n\n### 1. مفهوم أسس بناء المنهج\n\nأسس بناء المناهج هي القواعد والأركان التي يستند إليها مصممو المناهج عند التخطيط لأي منهج أو تطويره. ويتطلب بناء المنهج التفاعل بين فلسفة المجتمع وطبيعة المتعلم وخصائص نموه وطبيعة المعرفة والأسس التكنولوجية الحديثة.\n\nوتشمل الأسس الرئيسية:\n\n1. الأساس الفلسفي.\n2. الأساس النفسي.\n3. الأساس الاجتماعي والثقافي.\n4. الأساس المعرفي.\n5. الأساس التكنولوجي والرقمي.\n\n### 2. الأساس الفلسفي\n\nهو الإطار الفكري والتطبيقي الذي يحدد الغايات الكبرى للعملية التربوية. ويعكس المنهج الفلسفة السائدة في المجتمع وقيمه وعقيدته.\n\n#### الفلسفة المثالية\n\n- تعلي من شأن العقل والأفكار.\n- قد تؤثر في الاهتمام بالمواد النظرية والتراث الثقافي وتدريب العقل.\n\n#### الفلسفة الواقعية\n\n- ترى أن الحقيقة ترتبط بالعالم المادي والظواهر الطبيعية.\n- تؤثر في الاهتمام بالعلوم الطبيعية والتجريب والملاحظة والحقائق القابلة للقياس.\n\n#### الفلسفة التقدمية أو البراجماتية\n\n- تؤكد أهمية التجربة والخبرة المباشرة.\n- تجعل المتعلم محور العملية التعليمية.\n- تهتم بحل المشكلات والأنشطة العملية والربط بالواقع.\n\n#### وظائف الأساس الفلسفي\n\n- تحديد الأهداف العامة للتعليم.\n- المساعدة في اختيار المحتوى والخبرات.\n- توجيه طرق التدريس والتقويم.\n- تحديد القيم والمعايير التي يعبّر عنها المنهج.\n\n#### الفلسفة التربوية في المجتمع العربي والإسلامي\n\nتراعي:\n\n- الهوية العربية والإسلامية.\n- التوازن بين الروح والعقل والبدن.\n- قيم التسامح والمسؤولية الاجتماعية والمواطنة.\n- الجمع بين القيم الثابتة ومواكبة العلم والتطور الحضاري.\n\n### 3. الأساس النفسي\n\nيتعلق بطبيعة المتعلم وخصائص نموه وميوله وحاجاته وقدراته ونظريات التعلم التي توضح كيف يتعلم الإنسان.\n\n#### مراعاة خصائص النمو والفروق الفردية\n\n- تقديم خبرات تناسب المرحلة العمرية والنمائية.\n- مراعاة تكامل النمو العقلي والوجداني والحركي والاجتماعي.\n- تنويع الأنشطة والوسائل لتناسب اختلاف المتعلمين.\n- تقديم أنشطة إثرائية للمتقدمين ودعم علاجي لمن يواجهون صعوبات.\n\n#### النظرية السلوكية\n\nتركز تطبيقاتها على:\n\n- صياغة أهداف قابلة للقياس.\n- تقسيم المحتوى إلى خطوات صغيرة.\n- التدريب والتكرار.\n- التعزيز الفوري.\n\n#### النظرية المعرفية\n\nتركز تطبيقاتها على:\n\n- كيفية معالجة المعلومات.\n- تنظيم المحتوى بما يتناسب مع البنية المعرفية للمتعلم.\n- الانتقال من البسيط إلى المركب.\n- الفهم والخرائط الذهنية والتفكير المنطقي.\n\n#### النظرية البنائية\n\nتركز تطبيقاتها على:\n\n- بناء المتعلم معرفته انطلاقًا من خبراته السابقة.\n- التعلم القائم على المشكلات.\n- البحث الاستكشافي.\n- التعلم التشاركي.\n- ربط المعرفة الجديدة بالمعرفة السابقة.\n\n| النظرية | دور المنهج | دور المتعلم |\n|---|---|---|\n| السلوكية | تقديم تدريبات وتعزيز السلوك | يستجيب ويطبق |\n| المعرفية | تنظيم المعلومات وتسهيل معالجتها | يعالج المعلومات ويحللها |\n| البنائية | توفير المشكلات والخبرات الاستكشافية | يبني المعرفة بنفسه |\n\n### 4. الأساس الاجتماعي والثقافي\n\nيصمم المنهج لخدمة المجتمع وتلبية احتياجاته، ويتأثر بالتراث الثقافي والقيم والتقاليد والمشكلات الحالية والمستقبلية.\n\n#### عناصر الثقافة\n\n- **عموميات الثقافة:** اللغة والقيم والمعارف والعادات التي يشترك فيها معظم أفراد المجتمع، وتدعم التماسك والوحدة الاجتماعية.\n- **خصوصيات الثقافة:** المعارف والمهارات التخصصية التي ترتبط بفئات أو مهن معينة.\n\n#### أهمية الأساس الاجتماعي\n\n- نقل الثقافة والقيم بين الأجيال.\n- إعداد المتعلم للمشاركة في المجتمع.\n- ربط المحتوى بالمشكلات والاحتياجات الواقعية.\n- الاستجابة للتحولات الاجتماعية والمهنية.\n\n### 5. الأساس المعرفي\n\nيراعي طبيعة المعرفة والبنية الهيكلية للعلوم والعلاقات بينها. ومع الانفجار المعرفي، ينبغي اختيار المعارف الأساسية وتنظيمها وتنمية مهارات الوصول إلى المعلومات والتحقق منها واستخدامها.\n\nومن المبادئ المهمة:\n\n- الدقة العلمية.\n- التسلسل المنطقي.\n- الترابط بين المفاهيم.\n- التوازن بين العمق والاتساع.\n- ربط المعرفة بالتطبيق عندما يكون ذلك مناسبًا.\n\n### 6. الأساس التكنولوجي والرقمي\n\nيهتم بتوظيف التقنيات والمستحدثات الرقمية في تصميم المناهج وتنفيذها وتقويمها.\n\nمن أمثلته:\n\n- المنصات التعليمية.\n- الموارد الرقمية.\n- التعلم المدمج والتعليم عن بعد.\n- المحاكاة والوسائط التفاعلية.\n- أدوات التواصل والتعاون الرقمي.\n\nيجب أن يخدم استخدام التقنية الأهداف التعليمية، مع مراعاة الإتاحة والخصوصية والسلامة الرقمية وتفاوت الإمكانات.\n\n---\n\n## الفصل الرابع: أنواع المناهج الدراسية\n\nيمكن تصنيف المناهج بحسب محور التنظيم والاهتمام الرئيسي.\n\n### 1. المناهج المتمحورة حول المادة الدراسية\n\n#### أ. منهج المواد المنفصلة\n\nينظم المعرفة في مواد مستقلة، مثل التاريخ والجغرافيا والعلوم.\n\n**مميزاته:** وضوح المواد والتخصص والتسلسل.\n\n**محدوديته:** قد يؤدي إلى تجزئة المعرفة وضعف الربط بين المواد.\n\n#### ب. منهج المواد المترابطة\n\nيحافظ على المواد الدراسية، مع إنشاء روابط بينها، مثل الربط بين التاريخ والجغرافيا أو الرياضيات والعلوم.\n\nيساعد هذا التنظيم المتعلم على إدراك العلاقات بين المواد دون إلغاء التخصصات.\n\n#### ج. منهج المجالات الواسعة\n\nيجمع مواد متقاربة في مجال واحد أوسع بهدف تقليل التجزئة وتقديم رؤية أكثر تكاملًا.\n\n### 2. المناهج المتمحورة حول المتعلم\n\n#### أ. منهج النشاط\n\nينطلق من ميول المتعلم واهتماماته ويعتمد على المشاركة والخبرة والعمل، مع توجيه النشاط نحو الأهداف التربوية.\n\n#### ب. منهج الوحدات\n\nينظم التعلم حول موضوع أو مشكلة أو خبرة متكاملة، ويجمع معارف وأنشطة من مجالات مختلفة حول محور مشترك.\n\n#### ج. المنهج المتمركز حول المتعلم\n\nيراعي حاجات المتعلم واستعداداته وفروقاته الفردية، ويتيح المشاركة والاختيار والتعلم النشط ضمن أهداف واضحة.\n\n### 3. المناهج المتمحورة حول المجتمع\n\n#### أ. منهج النواة أو المواد المشتركة\n\nيركز على المعارف والخبرات الأساسية المشتركة التي يحتاج إليها جميع المتعلمين.\n\n#### ب. منهج المشكلات الاجتماعية\n\nينظم التعلم حول مشكلات وقضايا من واقع المجتمع، ويشجع البحث والتحليل والتعاون واقتراح الحلول.\n\n### 4. اتجاهات وتنظيمات معاصرة\n\n**المنهج التكنولوجي:** يوظف الأدوات والموارد الرقمية في التعليم.\n\n**المنهج الحلزوني:** يعيد تقديم المفاهيم الأساسية في مراحل متتابعة، مع زيادة العمق والتعقيد تدريجيًا.\n\n**المنهج الخفي:** ما يكتسبه المتعلم ضمنيًا من ثقافة المؤسسة وعلاقاتها وقواعدها.\n\n**المنهج المرن أو المتكيف:** يتيح تعديلات في الأنشطة والموارد والمسارات لتناسب احتياجات المتعلمين مع الحفاظ على الأهداف الأساسية.\n\n### 5. اختيار نوع المنهج\n\nيعتمد اختيار نوع المنهج على:\n\n- الأهداف التعليمية.\n- طبيعة المعرفة.\n- خصائص المتعلمين.\n- احتياجات المجتمع.\n- الوقت المتاح.\n- الموارد والإمكانات.\n\nوقد يجمع المنهج بين أكثر من نوع لتحقيق التكامل.\n\n---\n\n## الفصل الخامس: تطوير المناهج الدراسية\n\n### 1. مفهوم تطوير المناهج\n\nتطوير المنهج عملية منظمة ومستمرة لفحص المنهج وتحسين أهدافه ومحتواه وخبراته وطرائق تدريسه وتقويمه، استجابة للتغيرات المعرفية والتكنولوجية والاجتماعية واحتياجات المتعلمين.\n\n#### الفرق بين التغيير والتحسين والتطوير\n\n- **التغيير:** إجراء تعديل قد يكون محدودًا أو واسعًا.\n- **التحسين:** رفع جودة جانب أو أكثر من جوانب المنهج.\n- **التطوير:** عملية أشمل ومخططة تبدأ بدراسة الوضع الحالي وتحديد الاحتياجات وتنفيذ التعديلات وتقويم آثارها.\n\n### 2. دوافع تطوير المناهج\n\n- الانفجار المعرفي والتقدم العلمي.\n- التطور التكنولوجي والرقمي.\n- تغير احتياجات المجتمع وسوق العمل.\n- نتائج التقويم وتحديد نقاط القوة والضعف.\n- تغير خصائص المتعلمين واحتياجاتهم.\n- الحاجة إلى تنمية التفكير وحل المشكلات والتعلم المستمر.\n\n### 3. مراحل تطوير المنهج\n\n1. **دراسة الواقع وتشخيص الاحتياجات:** تحليل المنهج الحالي ونتائج المتعلمين واحتياجات المجتمع.\n2. **تحديد الأهداف:** صياغة النتائج المرغوبة وفق الأولويات.\n3. **اختيار المحتوى والخبرات:** تحديد المعارف والمهارات وتنظيمها.\n4. **اختيار طرائق التدريس والأنشطة والوسائل:** مواءمتها مع الأهداف والمحتوى.\n5. **التجريب أو التطبيق الأولي:** اختبار المنهج في ظروف محددة عند الإمكان.\n6. **التقويم وجمع التغذية الراجعة:** تحليل النتائج وآراء المعلمين والمتعلمين.\n7. **التعديل والتنفيذ والتدريب:** تحسين المنهج وتوفير الدعم اللازم.\n8. **المتابعة المستمرة:** التحقق من أثر التطوير واستدامته.\n\n### 4. نموذج تايلر\n\nيرتكز نموذج تايلر على أربعة أسئلة أساسية:\n\n1. ما الأهداف التعليمية التي ينبغي تحقيقها؟\n2. ما الخبرات التعليمية التي تساعد على تحقيق هذه الأهداف؟\n3. كيف يمكن تنظيم الخبرات التعليمية بفاعلية؟\n4. كيف يمكن تحديد ما إذا كانت الأهداف قد تحققت؟\n\n### 5. نموذج هيلدا تابا\n\nيؤكد نموذج هيلدا تابا دور المعلم والخبرة الميدانية، ويتدرج في العادة عبر:\n\n1. تشخيص الاحتياجات.\n2. صياغة الأهداف.\n3. اختيار المحتوى وتنظيمه.\n4. اختيار الخبرات التعليمية وتنظيمها.\n5. تحديد أساليب التقويم.\n\n### 6. استراتيجيات معاصرة لتطوير المناهج\n\n- إشراك المعلمين والمتعلمين والخبراء وأصحاب المصلحة.\n- الاعتماد على البحوث والبيانات ونتائج التقويم.\n- تحديث المحتوى بما يتناسب مع المهارات المطلوبة.\n- إدماج التقنية عندما تضيف قيمة تعليمية.\n- دعم التعلم النشط والمشروعات وحل المشكلات.\n- تطوير التقويم ليقيس الفهم والتطبيق والمهارات، لا الحفظ فقط.\n- تدريب المعلمين ومتابعة تنفيذ المنهج.\n\n### 7. معوقات وتحديات تطوير المناهج\n\n1. **مقاومة التغيير:** رفض بعض المعلمين والإداريين للأساليب الحديثة والميل إلى النمط القديم.\n2. **ضعف برامج التدريب:** عدم تأهيل المعلمين بالشكل الكافي لمواكبة الفلسفات والمهارات الجديدة.\n3. **قصور الإمكانات المادية والتقنية:** مثل ضعف البنية التحتية الرقمية في بعض المدارس.\n4. **انفصال التقويم عن المنهج المطور:** استمرار الاختبارات التقليدية المعتمدة على التذكر، بما يحد من تحقيق أهداف التطوير القائمة على مهارات التفكير العليا.\n\n### 8. شروط تساعد على نجاح التطوير\n\n- وضوح الأهداف وأولويات التطوير.\n- مشاركة المعلمين وتدريبهم.\n- توفير الموارد والبنية التحتية اللازمة.\n- الاتساق بين الأهداف والمحتوى والتدريس والتقويم.\n- جمع الملاحظات والبيانات باستمرار.\n- الاستعداد للتعديل بناءً على الأدلة والنتائج.\n\n---";
+/* ===== البيانات والبحث ===== */
+const norm=s=>s.replace(/[\u064B-\u0652\u0640]/g,'').replace(/[إأآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').toLowerCase();
+const STOP=new Set('من في على الي عن ما هو هي هل ماذا كيف لماذا اشرح شرح لي لنا هذا هذه ذلك التي الذي اللي او ان كان اذكر وضح اريد ممكن ايه ده دي يعني بين مع قارن مقارنة الفرق لخص تلخيص اختبرني'.split(' ').map(norm));
+const MAP={'مناهج':'منهج','اهداف':'هدف','مواد':'ماده','طرق':'طريقه','طرائق':'طريقه','اسس':'اساس','معايير':'معيار','مبادئ':'مبدا','مبدا':'مبدا','انواع':'نوع','عناصر':'عنصر','مراحل':'مرحله'};
+const stem=w=>{w=norm(w).replace(/^(وال|بال|فال|كال|لل|ال)/,'');if(MAP[w])return MAP[w];if(w.length>4)w=w.replace(/(ات|ون|ين|ها|ه|ي)$/,'');return MAP[w]||w};
+const tok=s=>norm(s).replace(/[^\u0621-\u064A0-9a-z\s]/g,' ').split(/\s+/).filter(w=>w.length>1&&!STOP.has(w));
+const e=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+let S=[],CH=[],P=[],G=[],DEF=true;
+function build(KB){S=[];let _ch='المحتوى',_cur=null;
+ KB.split('\n').forEach(l=>{const m=l.match(/^(#{2,4})\s+(.*)/);
+  if(m){const lv=m[1].length;const t=m[2].trim().replace(/^\d+\.\s*/,'');
+   if(/تعليمات الشات|قاعدة المعرفة الخاصة|نهاية قاعدة المعرفة/.test(t)){_cur=null;return}
+   if(lv===2)_ch=t;_cur={ch:_ch,title:t,lv,body:[]};S.push(_cur)}
+  else if(_cur&&l.trim()!=='---')_cur.body.push(l)});
+ S.forEach((s,i)=>{s.i=i;const f=s.body.slice();
+  if(s.lv===3)for(let j=i+1;j<S.length&&S[j].lv>3;j++)f.push('','#### '+S[j].title,...S[j].body);
+  s.full=f.join('\n').trim();s.srch=s.full.length>20;
+  s.tt=new Set(tok(s.title).map(stem));s.bt=new Set(tok(s.body.join(' ')).map(stem));s.nt=norm(s.title)});
+ CH=[...new Set(S.filter(s=>s.lv===2&&s.title!=='المقدمة').map(s=>s.ch))];
+ if(!CH.length)CH=[...new Set(S.map(s=>s.ch))];
+ P=S.filter(s=>s.srch&&s.lv>=3).map(s=>({s,it:itemsOf(s)})).filter(p=>p.it.length>=3);
+ G=[];const sn=new Set();S.forEach(s=>s.body.forEach(l=>{const m=l.match(/\*\*([^*:：]{3,45})[:：]\*\*\s*(.{12,})/);if(m&&!sn.has(m[1])){sn.add(m[1]);G.push({t:m[1].trim(),d:m[2].replace(/\*\*/g,'').trim(),si:s.i})}}))}
+function search(q){const qt=[...new Set(tok(q).map(stem))],nq=norm(q);
+ return S.filter(s=>s.srch).map(s=>{let sc=0;
+  for(const t of qt){if(s.tt.has(t))sc+=3;
+   else if(t.length>=4&&[...s.tt].some(x=>x.length>=4&&(x.startsWith(t)||t.startsWith(x))))sc+=2;
+   else if(s.bt.has(t))sc+=1}
+  if(s.nt.length>3&&nq.includes(s.nt))sc+=6;return{i:s.i,s:sc}}).filter(h=>h.s>0).sort((a,b)=>b.s-a.s)}
+function md(t){const inl=s=>e(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');let o='',list=null,tb=0,m;
+ const close=()=>{if(list){o+='</'+list+'>';list=null}if(tb){o+='</tbody></table></div>';tb=0}};
+ for(const l of t.split('\n')){
+  if(!l.trim()){close();continue}
+  if(m=l.match(/^(#{2,4})\s+(.*)/)){close();o+='<h4>'+inl(m[2])+'</h4>';continue}
+  if(l.startsWith('|')){if(/^\|[\s\-:|]+$/.test(l))continue;const c=l.split('|').slice(1,-1).map(x=>inl(x.trim()));
+   if(!tb){close();tb=1;o+='<div class="tw"><table><thead><tr>'+c.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'}else o+='<tr>'+c.map(x=>'<td>'+x+'</td>').join('')+'</tr>';continue}
+  if(m=l.match(/^\s*[-*]\s+(.*)/)){if(list!=='ul'){close();o+='<ul>';list='ul'}o+='<li>'+inl(m[1])+'</li>';continue}
+  if(m=l.match(/^\s*\d+\.\s+(.*)/)){if(list!=='ol'){close();o+='<ol>';list='ol'}o+='<li>'+inl(m[1])+'</li>';continue}
+  close();o+='<p>'+inl(l)+'</p>'}
+ close();return o}
+/*UI*/
+const $=id=>document.getElementById(id),chat=$('chat');
+const scr=()=>chat.scrollTop=chat.scrollHeight;
+function msg(cls,html,raw){const d=document.createElement('div');d.className='m '+cls;d.innerHTML=html;
+ if(raw){const b=document.createElement('button');b.className='cp';b.textContent='نسخ';b.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(raw);b.textContent='تم النسخ ✓';setTimeout(()=>b.textContent='نسخ',1200)};d.appendChild(b)}
+ chat.appendChild(d);return d}
+function you(t){const d=document.createElement('div');d.className='m u';d.textContent=t;chat.appendChild(d);scr()}
+function chips(list){chat.querySelectorAll('.chips').forEach(c=>c.remove());if(!list||!list.length)return;
+ const d=document.createElement('div');d.className='chips';
+ list.forEach(x=>{const b=document.createElement('button');b.textContent=x.t;b.onclick=()=>{d.remove();if(!x.s)you(x.t);x.f()};d.appendChild(b)});
+ chat.appendChild(d);scr()}
+const STARTERS=()=>!DEF?shuf(S.filter(s=>s.srch&&s.lv>=3)).slice(0,5).map(s=>({t:s.title,f:()=>showSec(s.i)})):[
+ {t:'ما هو المنهج الحديث؟',f:()=>answer('ما هو المنهج الحديث؟')},{t:'ما أنواع التقويم؟',f:()=>answer('ما أنواع التقويم؟')},
+ {t:'اشرح نموذج تايلر',f:()=>answer('اشرح نموذج تايلر')},{t:'ما معوقات تطوير المناهج؟',f:()=>answer('ما معوقات تطوير المناهج؟')},
+ {t:'ما الأساس الفلسفي؟',f:()=>answer('ما الأساس الفلسفي؟')}];
+function bot(html,raw,list,si,fast){const w=msg('a','<span class="dots"><i></i><i></i><i></i></span>');scr();
+ setTimeout(()=>{w.remove();const d=msg('a',html,raw);if(si!=null)favBtn(d,si);chips(list||STARTERS());scr()},fast?0:300)}
+const src=(ch,t)=>'<div class="src">📖 من الكتاب — '+e(ch)+(t?' › '+e(t):'')+'</div>';
+const nextOf=i=>{const lv=S[i].lv;for(let j=i+1;j<S.length;j++){if(S[j].srch&&S[j].lv<=Math.max(lv,3)&&(lv>3||S[j].lv<=3))return S[j]}return null};
+function showSec(i,hits){const s=S[i];if(!s)return;const L=[];
+ (hits||[]).forEach(h=>L.push({t:'هل تقصد: '+S[h.i].title,f:()=>showSec(h.i)}));
+ const n=nextOf(i);if(n)L.push({t:'التالي: '+n.title,f:()=>showSec(n.i)});
+ L.push({t:'🎯 اختبرني في هذا الفصل',f:()=>startQuiz(s.ch)});
+ bot(src(s.ch,s.title)+md(s.full)+'<p class="note">النص أعلاه من ملف المحتوى الحالي (ليس شرحًا مولَّدًا).</p>',s.title+'\n'+s.full,L,s.i)}
+function answer(q){const h=search(q);
+ if(!h.length||h[0].s<3)return bot('<p>المعلومة غير موضحة في قاعدة المعرفة المتاحة.</p><p class="note">جرّب صياغة أخرى (كلمات مفتاحية مثل: التقويم، الأهداف، نموذج تايلر) أو اختر من الاقتراحات.</p>');
+ showSec(h[0].i,h.slice(1,4).filter(x=>x.s>=3))}
+/* لخّص */
+const chapChips=f=>CH.map(c=>({t:c.split(':')[0],f:()=>f(c)}));
+function summary(c){const L=S.filter(s=>s.ch===c&&s.lv===3);
+ const line=s=>{const x=s.body.find(l=>l.trim()&&!l.startsWith('#'))||'';return x.replace(/^\s*(-|\d+\.)\s+/,'').replace(/\*\*/g,'').slice(0,130)};
+ bot(src(c)+'<p class="note">ملخص سريع لعناوين الفصل (مبني على عناوين الكتاب ومقدمات أقسامه):</p><ul>'+L.map(s=>'<li><b>'+e(s.title)+'</b>: '+e(line(s))+'</li>').join('')+'</ul>',
+  L.map(s=>'- '+s.title+': '+line(s)).join('\n'),L.map(s=>({t:s.title,f:()=>showSec(s.i)})).slice(0,8))}
+/* قارن */
+const T=re=>S.findIndex(s=>re.test(s.title)),tableOf=s=>s.full.split('\n').filter(l=>l.startsWith('|')).join('\n');
+function presets(){return[
+ {ok:T(/^مقارنة بين المنهج/)>=0,t:'التقليدي والحديث',f:()=>{const s=S[T(/^مقارنة بين المنهج/)];bot(src(s.ch,s.title)+md(tableOf(s)),tableOf(s),cmpChips())}},
+ {ok:T(/^النظرية البنائية$/)>=0,t:'السلوكية والمعرفية والبنائية',f:()=>{const s=S[T(/^النظرية البنائية$/)];bot(src(s.ch,'الأساس النفسي — مقارنة النظريات')+md(tableOf(s)),tableOf(s),cmpChips())}},
+ {ok:T(/^أنواع التقويم$/)>=0,t:'أنواع التقويم',f:()=>showSec(T(/^أنواع التقويم$/))},
+ {ok:T(/^أنواع المنهج من حيث/)>=0,t:'المنهج الرسمي والخفي والصفري',f:()=>showSec(T(/^أنواع المنهج من حيث/))}].filter(x=>x.ok)}
+const cmpChips=presets;
+function compare(q){const n=q.replace(/قارن|مقارنة|مقارنه|الفرق|بين/g,' ').trim();
+ const parts=n.split(/\s+و(?=\S)|،|,|\/|\s+مع\s+/).map(x=>x.trim()).filter(x=>x.length>1);
+ if(parts.length<2)return bot('<p>اكتب المفهومين هكذا: <b>قارن بين المنهج التقليدي والحديث</b>، أو اختر مقارنة جاهزة:</p>',null,presets());
+ const seen=new Set();let html='',raw='';
+ parts.slice(0,3).forEach((p,k)=>{const h=search(p)[0];
+  if(!h||h.s<3||seen.has(h.i)){if(!h||h.s<3)html+='<h4>'+e(p)+'</h4><p>المعلومة غير موضحة في قاعدة المعرفة المتاحة.</p>';return}
+  seen.add(h.i);const s=S[h.i];html+=src(s.ch,s.title)+md(s.full)+'<hr>';raw+=s.title+'\n'+s.full+'\n\n'});
+ bot(html+'<p class="note">عُرض نص كل مفهوم من الكتاب جنبًا إلى جنب؛ للجداول الجاهزة اختر من الاقتراحات.</p>',raw,presets())}
+/* اختبار */
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+const itemsOf=s=>s.body.filter(l=>/^\s*(-|\d+\.)\s+/.test(l)).map(l=>{let t=l.replace(/^\s*(-|\d+\.)\s+/,'').replace(/\*\*/g,'').trim();const k=t.indexOf(':');if(k>=4&&k<60)t=t.slice(0,k).trim();return t}).filter(t=>t.length>5&&t.length<90);
+function buildQuiz(chap){return shuf(P.filter(p=>!chap||p.s.ch===chap)).slice(0,5).map((p,k)=>{
+ const c=shuf(p.it)[0],uniq=[];
+ shuf(P.filter(o=>o.s.ch!==p.s.ch).flatMap(o=>o.it.map(t=>({t,s:o.s})))).forEach(o=>{if(!p.it.includes(o.t)&&!uniq.some(u=>u.t===o.t))uniq.push(o)});
+ if(k%2===0&&uniq.length>=3)return{type:'mc',q:'أي مما يلي ورد ضمن «'+p.s.title+'»؟',opts:shuf([{t:c,ok:1},...uniq.slice(0,3).map(x=>({t:x.t,ok:0}))]),why:'«'+c+'» ورد ضمن «'+p.s.title+'» ('+p.s.ch.split(':')[0]+').'};
+ const truth=Math.random()<.5;const it=truth?c:uniq[0].t;
+ return{type:'tf',q:'صح أم خطأ: «'+it+'» ورد ضمن «'+p.s.title+'».',ans:truth,why:truth?'صحيح، ورد ضمن «'+p.s.title+'».':'خطأ، هذا العنصر ورد ضمن «'+uniq[0].s.title+'» ('+uniq[0].s.ch.split(':')[0]+') وليس ضمن «'+p.s.title+'».'}})}
+let Q=null;
+function quizMenu(){bot('<p>اختر نطاق الاختبار التدريبي (5 أسئلة):</p>',null,[{t:'كل الكتاب',f:()=>startQuiz()},...chapChips(startQuiz)])}
+function startQuiz(chap){Q={qs:buildQuiz(chap),i:0,sc:0,wrong:[]};if(!Q.qs.length)return bot('<p>لا توجد قوائم كافية في هذا الفصل لتوليد أسئلة.</p>',null,[{t:'اختيار نطاق آخر',f:quizMenu}]);nextQ()}
+function nextQ(){if(Q.i>=Q.qs.length)return endQ();const q=Q.qs[Q.i];
+ const d=msg('a','<div class="src">🎯 سؤال '+(Q.i+1)+' من '+Q.qs.length+'</div><p><b>'+e(q.q)+'</b></p><div class="opts"></div><div class="fb"></div>');
+ const box=d.querySelector('.opts'),opts=q.type==='mc'?q.opts:[{t:'صح',ok:q.ans},{t:'خطأ',ok:!q.ans}];
+ opts.forEach(o=>{const b=document.createElement('button');b.className='opt';b.textContent=o.t;b.onclick=()=>{
+  const all=[...box.children];all.forEach((x,j)=>{x.disabled=true;if(opts[j].ok)x.classList.add('good')});
+  if(o.ok)Q.sc++;else{b.classList.add('bad');Q.wrong.push(q)}
+  d.querySelector('.fb').innerHTML='<p>'+(o.ok?'✅ إجابة صحيحة':'❌ إجابة غير صحيحة')+' — '+e(q.why)+'</p>';
+  Q.i++;chips([{t:Q.i<Q.qs.length?'السؤال التالي ▶':'عرض النتيجة',s:1,f:nextQ}]);scr()};box.appendChild(b)});scr()}
+function endQ(){const n=Q.qs.length;try{const h=JSON.parse(LS('qh')||'[]');h.push({sc:Q.sc,n});LS('qh',JSON.stringify(h.slice(-10)))}catch(x){}
+ bot('<div class="src">🏁 النتيجة</div><p><b>'+Q.sc+' من '+n+'</b> ('+Math.round(100*Q.sc/n)+'%)</p>'+(Q.wrong.length?'<p>راجع هذه النقاط:</p><ul>'+Q.wrong.map(q=>'<li>'+e(q.why)+'</li>').join('')+'</ul>':'<p>أحسنت! كل الإجابات صحيحة 🎉</p>')+'<p class="note">أسئلة تدريبية مولّدة تلقائيًا من قاعدة المعرفة، وليست امتحانًا رسميًا.</p>',null,[{t:'🔁 اختبار جديد',f:quizMenu},{t:'💬 العودة للأسئلة',f:()=>bot('<p>اسألني عن أي موضوع في الكتاب.</p>')}])}
+/* الإدخال */
+const ORD=['الاول','الثاني','الثالث','الرابع','الخامس'];
+function chapterIn(n){if(!/فصل/.test(n))return null;const k=ORD.findIndex(o=>n.includes(o));return k>=0?CH[k]:null}
+function ask(t){t=t.trim();if(!t)return;you(t);const n=norm(t);
+ if(/قارن|مقارنه|الفرق بين/.test(n))return compare(t);
+ if(/اختبر|اختبار|امتحن/.test(n)){const c=chapterIn(n);return c?startQuiz(c):quizMenu()}
+ if(/لخص|تلخيص|ملخص/.test(n)){const c=chapterIn(n);return c?summary(c):bot('<p>اختر الفصل الذي تريد تلخيصه:</p>',null,chapChips(summary))}
+ answer(t)}
+$('f').onsubmit=ev=>{ev.preventDefault();$('sg').innerHTML='';const v=$('q').value;$('q').value='';ask(v)};
+document.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
+ if(a==='ask'){$('q').focus();bot('<p>اكتب سؤالك أو اختر اقتراحًا:</p>')}
+ if(a==='sum')bot('<p>اختر الفصل الذي تريد تلخيصه:</p>',null,chapChips(summary));
+ if(a==='quiz')quizMenu();
+ if(a==='cmp')bot('<p>اكتب مثلًا: <b>قارن بين المنهج التقليدي والحديث</b>، أو اختر مقارنة جاهزة:</p>',null,presets())});
+/* تحميل المحتوى */
+function useKB(text,label,save,title){build(text);DEF=label==='المحتوى المضمّن';Q=null;chat.innerHTML='';
+ $('h1').textContent='📘 '+(title||(DEF?'مساعد «المناهج وتنظيماتها»':(text.match(/^#\s+(.+)$/m)||[])[1]||'مساعد المحتوى التعليمي'));
+ document.title=$('h1').textContent;
+ $('srcl').textContent='المصدر: '+label+' — '+S.filter(s=>s.srch).length+' قسمًا';
+ if(save){try{localStorage.setItem('kb',text);localStorage.setItem('kbn',label)}catch(x){}}
+ renderSide();welcome()}
+function valid(text){const keep=[S,CH,P,G];build(text);const ok=S.filter(s=>s.srch).length>=2;[S,CH,P,G]=keep;return ok}
+async function init(){let text=null,label='';
+ try{text=localStorage.getItem('kb');label=localStorage.getItem('kbn')||'ملف محمّل'}catch(x){}
+ if(!text&&/^https?:/.test(location.protocol)){try{const r=await fetch('content.md',{cache:'no-store'});if(r.ok){text=await r.text();label='content.md'}}catch(x){}}
+ if(!text||!valid(text)){text=DEFAULT_KB;label='المحتوى المضمّن'}
+ useKB(text,label,false)}
+$('ld').onclick=()=>$('fi').click();
+$('fi').onchange=async ev=>{const f=ev.target.files[0];if(!f)return;const text=await f.text();ev.target.value='';
+ if(!valid(text))return alert('الملف لا يحتوي أقسامًا كافية. استخدم عناوين ## للفصول و ### للعناوين مع نص تحتها.');
+ useKB(text,f.name,true)};
+$('rs').onclick=()=>{try{localStorage.removeItem('kb');localStorage.removeItem('kbn')}catch(x){}useKB(DEFAULT_KB,'المحتوى المضمّن',false)};
+/* ميزات إضافية */
+const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);v===null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(x){return null}};
+let FAV=[];try{FAV=JSON.parse(LS('fav')||'[]')}catch(x){}
+const side=$('side'),ov=$('ov'),closeSide=()=>{side.classList.remove('open');ov.classList.remove('on')};
+const mk=(t,f)=>{const b=document.createElement('button');b.textContent=t;b.onclick=f;return b};
+function renderFav(){const box=$('fav');box.innerHTML='';const L=FAV.map(t=>S.findIndex(s=>s.title===t)).filter(i=>i>=0);
+ $('fc').textContent=L.length?'('+L.length+')':'';if(!L.length)box.innerHTML='<p class="note">اضغط «☆ أضف للمفضلة» تحت أي إجابة.</p>';
+ L.forEach(i=>box.appendChild(mk(S[i].title,()=>{closeSide();you(S[i].title);showSec(i)})))}
+function renderSide(){const toc=$('toc');toc.innerHTML='';
+ [...new Set(S.filter(s=>s.srch).map(s=>s.ch))].forEach(c=>{const L=S.filter(s=>s.ch===c&&s.srch&&(s.lv===3||s.lv===2));if(!L.length)return;
+  const d=document.createElement('details');d.innerHTML='<summary title="'+e(c)+'">'+e(c.length>34?c.split(':')[0]:c)+'</summary>';
+  L.forEach(s=>d.appendChild(mk(s.title,()=>{closeSide();you(s.title);showSec(s.i)})));toc.appendChild(d)});
+ const gl=$('gl');gl.innerHTML='';$('gc').textContent=G.length?'('+G.length+')':'';
+ G.forEach(g=>gl.appendChild(mk(g.t,()=>{closeSide();you(g.t);bot(src(S[g.si].ch,S[g.si].title)+'<p><b>'+e(g.t)+'</b>: '+e(g.d)+'</p>',g.t+': '+g.d,[{t:'افتح القسم كاملًا',f:()=>showSec(g.si)}])})));
+ renderFav()}
+function favBtn(d,i){const s=S[i],b=document.createElement('button');b.className='cp';const on=()=>FAV.includes(s.title);
+ const up=()=>b.textContent=on()?'⭐ في المفضلة':'☆ أضف للمفضلة';up();
+ b.onclick=()=>{FAV=on()?FAV.filter(x=>x!==s.title):[...FAV,s.title];LS('fav',JSON.stringify(FAV));up();renderFav()};d.appendChild(b)}
+function welcome(){const h=new Date().getHours(),g=h<5?'أهلًا بك':h<12?'صباح الخير':h<18?'مساء الخير':'مساء النور',nm=LS('nm');
+ let last=null;try{const hh=JSON.parse(LS('qh')||'[]');last=hh[hh.length-1]}catch(x){}
+ const pool=S.filter(s=>s.srch&&s.lv>=3),dc=pool.length?pool[Math.floor(Date.now()/864e5)%pool.length]:null;
+ const line=dc?(dc.body.find(l=>l.trim()&&!l.startsWith('#'))||'').replace(/^\s*(-|\d+\.)\s+/,'').replace(/\*\*/g,'').slice(0,150):'';
+ const d=msg('a hero','<div class="hg">'+g+(nm?' يا '+e(nm):'')+' 👋</div><p>أنا مساعدك للمذاكرة من الملف المحمّل. اسألني، أو اختبر نفسك، أو تصفّح الفهرس من القائمة ☰.</p>'+
+  '<div class="stats"><div><b>'+CH.length+'</b>فصول</div><div><b>'+S.filter(s=>s.srch).length+'</b>قسمًا</div><div><b>'+G.length+'</b>مصطلحًا</div><div><b>'+(last?last.sc+'/'+last.n:'—')+'</b>آخر اختبار</div></div>'+
+  (dc?'<div class="daily"><span>💡 بطاقة اليوم — '+e(dc.title)+'</span><p>'+e(line)+'…</p><button class="dd">اقرأ القسم</button></div>':'')+
+  (nm?'':'<div class="nm"><input class="ni" placeholder="اكتب اسمك لأرحّب بك"><button class="nb">حفظ</button></div>'));
+ const dd=d.querySelector('.dd');if(dd)dd.onclick=()=>{you(dc.title);showSec(dc.i)};
+ const nb=d.querySelector('.nb');if(nb)nb.onclick=()=>{const v=d.querySelector('.ni').value.trim();if(v){LS('nm',v);chat.innerHTML='';welcome()}};
+ chips(STARTERS())}
+$('q').oninput=()=>{const v=$('q').value.trim(),sg=$('sg');sg.innerHTML='';if(v.length<2)return;
+ search(v).filter(h=>h.s>=3).slice(0,4).forEach(h=>sg.appendChild(mk('🔎 '+S[h.i].title,()=>{$('q').value='';sg.innerHTML='';you(S[h.i].title);showSec(h.i)})))};
+if(LS('th'))document.documentElement.dataset.theme=LS('th');
+$('th').onclick=()=>{const c=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');const n=c==='dark'?'light':'dark';document.documentElement.dataset.theme=n;LS('th',n)};
+$('mn').onclick=()=>{side.classList.toggle('open');ov.classList.toggle('on')};ov.onclick=closeSide;
+$('sv').onclick=()=>{const t=[...chat.querySelectorAll('.m')].map(m=>(m.classList.contains('u')?'🙋 ':'🤖 ')+m.innerText.replace(/نسخ$/,'').trim()).join('\n\n---\n\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/plain;charset=utf-8'}));a.download='المحادثة.txt';a.click()};
+init();
+</script>
+</body>
+</html>
